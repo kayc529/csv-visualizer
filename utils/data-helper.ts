@@ -16,3 +16,15 @@ export const convertNumbersToPercentage = (
 
   return arr;
 };
+
+export const convertKeyValuePairToArray = (
+  data: Map<string, number>
+): (string | number | string)[][] => {
+  let arr = [];
+
+  for (let [key, value] of data) {
+    arr.push([key, value]);
+  }
+
+  return arr;
+};

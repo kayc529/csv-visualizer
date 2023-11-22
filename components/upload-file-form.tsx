@@ -28,6 +28,11 @@ export default function UploadFileForm() {
     });
   };
 
+  const resetData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setCsvFile(null);
+    dataStore.reset();
+  };
+
   const processCSVOutput = (results: Papa.ParseResult<unknown>) => {
     const { data } = results;
     let csvData = new Map<string, number>();
@@ -51,6 +56,7 @@ export default function UploadFileForm() {
     e.preventDefault();
     let file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
     setCsvFile(file);
+    console.log(file);
   };
 
   return (
@@ -75,13 +81,22 @@ export default function UploadFileForm() {
           onChange={(e) => onSurveyNameChange(e)}
           value={dataStore.chartName}
         />
-        <button
-          className='w-max px-2 py-1 mt-4 bg-slate-200 border border-black disabled:opacity-50'
-          onClick={(e) => submit(e)}
-          disabled={csvFile === null}
-        >
-          Generate Data
-        </button>
+        <div className='flex gap-x-4'>
+          <button
+            className='w-max px-2 py-1 mt-4 bg-slate-200 border border-black disabled:opacity-50'
+            onClick={submit}
+            disabled={csvFile === null}
+          >
+            Generate Data
+          </button>
+          <button
+            className='w-max px-2 py-1 mt-4 bg-slate-200 border border-black disabled:opacity-50'
+            onClick={resetData}
+            disabled={csvFile === null}
+          >
+            Reset Data
+          </button>
+        </div>
       </form>
     </>
   );
