@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'CVS Visualizer',
+  title: 'CSV Visualizer',
   description: 'A Visualizer that displays .csv data in the form of charts',
 };
 

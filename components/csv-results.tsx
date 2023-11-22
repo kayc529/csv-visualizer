@@ -49,10 +49,11 @@ export default function CsvResults() {
               Total Number of Votes: {dataStore.count}
             </p>{' '}
             <button
-              className='w-max px-2 py-1 bg-slate-200 border border-black'
+              className='w-max px-2 py-1 bg-slate-200 border border-black disabled:opacity-50'
               onClick={() => {
                 dataStore.showChart();
               }}
+              disabled={dataStore.isShowChart}
             >
               Generate Chart
             </button>
@@ -126,7 +127,7 @@ export default function CsvResults() {
             className='w-max mt-10 px-2 py-1 bg-slate-200 border border-black'
             onClick={changeChartType}
           >
-            {chartType === 'bar' ? 'Show Pie Chart' : 'Show Bar Chart'}
+            Switch to {chartType === 'bar' ? 'Pie Chart' : 'Bar Chart'}
           </button>
           <button
             className='w-max mt-10 p-1 bg-slate-200 border border-black'
