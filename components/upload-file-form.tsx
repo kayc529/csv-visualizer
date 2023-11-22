@@ -7,6 +7,7 @@ import { useDataStore } from '@/utils/use-bear-store';
 export default function UploadFileForm() {
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const dataStore = useDataStore();
+  const [renderKey, setRenderKey] = useState(0);
 
   const onSurveyNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -31,6 +32,8 @@ export default function UploadFileForm() {
   const resetData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCsvFile(null);
     dataStore.reset();
+    //force re-render the file input
+    setRenderKey(!renderKey ? 1 : 0);
   };
 
   const processCSVOutput = (results: Papa.ParseResult<unknown>) => {
@@ -56,7 +59,6 @@ export default function UploadFileForm() {
     e.preventDefault();
     let file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
     setCsvFile(file);
-    console.log(file);
   };
 
   return (
@@ -71,6 +73,7 @@ export default function UploadFileForm() {
           name='uploadFile'
           type='file'
           onChange={onCsvUploaded}
+          key={renderKey}
           accept='.csv'
         />
         <label htmlFor='surveyName'>Survey Name (Optional)</label>
